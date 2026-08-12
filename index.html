@@ -157,7 +157,7 @@
 
   /* Identity block */
   .identity {
-    margin-bottom: 40px;
+    margin-bottom: 26px;
     opacity: 0;
     animation: fadeUp 0.7s ease forwards 0.2s;
   }
@@ -199,7 +199,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     opacity: 0;
     animation: fadeUp 0.7s ease forwards 0.35s;
   }
@@ -221,7 +221,7 @@
   .destinations {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .dest-card {
@@ -258,7 +258,7 @@
 
   .dest-body {
     flex: 1;
-    padding: 14px 18px;
+    padding: 11px 18px;
   }
   .dest-tag {
     font-size: 8px;
@@ -310,6 +310,112 @@
     font-weight: 300;
     letter-spacing: 0.1em;
     color: var(--white-dim);
+  }
+
+  /* Signup section — Open Studio Session */
+  .signup-divider {
+    margin-top: 8px;
+  }
+  .signup-card {
+    display: flex;
+    align-items: stretch;
+    background: var(--dark-card);
+    border: 1px solid var(--grey-line);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.75s;
+  }
+  .signup-accent {
+    width: 4px;
+    flex-shrink: 0;
+    background: var(--gold);
+  }
+  .signup-body {
+    flex: 1;
+    padding: 13px 18px 16px;
+  }
+  .signup-tag {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3px;
+  }
+  .signup-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    margin-bottom: 5px;
+  }
+  .signup-desc {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--white-dim);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    max-width: 420px;
+    margin-bottom: 12px;
+  }
+  .signup-form {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+  }
+  .signup-input {
+    flex: 1;
+    min-width: 0;
+    background: var(--dark);
+    border: 1px solid var(--grey-line);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 10px 12px;
+    letter-spacing: 0.02em;
+  }
+  .signup-input::placeholder { color: var(--white-dim); }
+  .signup-input:focus { outline: none; border-color: var(--gold); }
+  .signup-btn {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0 18px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .signup-success { display: none; }
+  .signup-success-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .signup-success-actions a {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .signup-success-actions a.primary {
+    background: var(--gold);
+    color: var(--dark);
+  }
+  body.show-success .signup-form-wrap { display: none; }
+  body.show-success .signup-success { display: block; }
+
+  @media (max-width: 640px) {
+    .signup-desc { display: none; }
+    .signup-body { padding: 10px 12px; }
+    .signup-form { flex-direction: column; max-width: 100%; }
+    .signup-btn { padding: 10px 12px; }
   }
 
   /* ── ANIMATIONS ── */
@@ -557,6 +663,36 @@
       </a>
 
     </div>
+
+    <!-- Open Studio Session — free monthly drop-in signup -->
+    <div class="section-divider signup-divider">
+      <span class="section-divider-label">Free Monthly Drop-In</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="signup-card">
+      <div class="signup-accent"></div>
+      <div class="signup-body">
+
+        <div class="signup-form-wrap">
+          <div class="signup-tag">Monthly Drop-In</div>
+          <div class="signup-name">Open Studio Session</div>
+          <div class="signup-desc">No prep, no pressure &mdash; just bring whatever you're working on and get a few quick ears on it. Free, live, once a month.</div>
+          <form class="signup-form" action="https://app.kit.com/forms/9795184/subscriptions" method="post">
+            <input type="email" name="email_address" class="signup-input" placeholder="you@email.com" required>
+            <button type="submit" class="signup-btn">Reserve my spot</button>
+          </form>
+        </div>
+
+        <div class="signup-success">
+          <div class="signup-tag">You're in</div>
+          <div class="signup-name">See you at Open Studio Session</div>
+          <div class="signup-desc">Check your inbox &mdash; confirm your spot and grab the recurring Meet link.</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
 </main>
@@ -566,5 +702,12 @@
   <span>timothyvancleave.com</span>
 </footer>
 
+  <script>
+    // If Kit just redirected back here after a signup, show the on-brand
+    // success view instead of the plain signup form.
+    if (window.location.hash === '#confirmed') {
+      document.body.classList.add('show-success');
+    }
+  </script>
 </body>
 </html>

@@ -324,6 +324,41 @@
     letter-spacing: 0.1em;
     color: var(--white-dim);
   }
+  .footer-social {
+    display: flex;
+    gap: 6px;
+  }
+  .footer-social a {
+    display: block;
+    padding: 6px;
+    color: var(--white-dim);
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--gold); }
+  .footer-social .icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  .icon-threads {
+    -webkit-mask-image: url(icons/threads.svg);
+    mask-image: url(icons/threads.svg);
+  }
+  .icon-instagram {
+    -webkit-mask-image: url(icons/instagram.svg);
+    mask-image: url(icons/instagram.svg);
+  }
+  .icon-x {
+    -webkit-mask-image: url(icons/x.svg);
+    mask-image: url(icons/x.svg);
+  }
 
   /* Signup section — Open Studio Session */
   .signup-card {
@@ -980,6 +1015,11 @@
 
 <footer class="site-footer">
   <span>&copy; Dr. Timothy Van Cleave &nbsp;·&nbsp; Portland, OR</span>
+  <div class="footer-social">
+    <a href="https://www.threads.net/@tvc_music" target="_blank" rel="noopener" aria-label="Threads"><span class="icon icon-threads"></span></a>
+    <a href="https://www.instagram.com/tvc_music" target="_blank" rel="noopener" aria-label="Instagram"><span class="icon icon-instagram"></span></a>
+    <a href="https://x.com/tvc__music" target="_blank" rel="noopener" aria-label="X"><span class="icon icon-x"></span></a>
+  </div>
   <span>timothyvancleave.com</span>
 </footer>
 

@@ -104,14 +104,23 @@
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 4px;
+    padding: 12px;
+    margin-right: -12px;
+    background: none;
+    border: 0;
+    -webkit-tap-highlight-color: transparent;
   }
   .hamburger span {
     display: block;
     width: 22px;
     height: 1.5px;
     background: var(--white-dim);
+    transition: transform 0.25s, opacity 0.2s;
   }
+  /* Three lines turn into an X while the menu is open */
+  nav.nav-open .hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  nav.nav-open .hamburger span:nth-child(2) { opacity: 0; }
+  nav.nav-open .hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* ── MAIN LAYOUT ── */
   .site-main {
@@ -317,16 +326,14 @@
   }
 
   /* Signup section — Open Studio Session */
-  .signup-divider {
-    margin-top: 8px;
-  }
   .signup-card {
     display: flex;
     align-items: stretch;
     background: var(--dark-card);
     border: 1px solid var(--grey-line);
     opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.75s;
+    margin-bottom: 26px;
+    animation: fadeUp 0.6s ease forwards 0.3s;
   }
   .signup-accent {
     width: 4px;
@@ -662,6 +669,26 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
 
+    /* Dropdown menu, shown when the hamburger is tapped */
+    nav.nav-open .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding: 4px 24px 12px;
+      background: rgba(11,10,7,0.98);
+      border-bottom: 1px solid var(--grey-line);
+    }
+    nav.nav-open .nav-links li + li { border-top: 1px solid var(--grey-line); }
+    nav.nav-open .nav-links a {
+      display: block;
+      padding: 16px 0;
+      font-size: 11px;
+    }
+
     .site-main {
       flex-direction: column;
       height: auto;
@@ -800,14 +827,14 @@
       <div class="nav-brand-rule"></div>
       <div class="nav-brand-text">Dr. Timothy Van Cleave</div>
     </div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="https://studio.timothyvancleave.com">Studio</a></li>
       <li><a href="https://music.timothyvancleave.com">Music</a></li>
       <li><a href="https://writing.timothyvancleave.com">Writing</a></li>
     </ul>
-    <div class="hamburger">
+    <button type="button" class="hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -835,6 +862,35 @@
       <div class="identity-title">Dr.</div>
       <div class="identity-name">TIMOTHY<br><span class="gold">VAN CLEAVE</span></div>
       <div class="identity-creds">Teaching, making records, and sharing my thoughts in prose.</div>
+    </div>
+
+    <!-- Open Studio Session — free monthly drop-in signup -->
+    <div class="section-divider signup-divider">
+      <span class="section-divider-label">Free Monthly Drop-In</span>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="signup-card">
+      <div class="signup-accent"></div>
+      <div class="signup-body">
+
+        <div class="signup-form-wrap">
+          <div class="signup-tag">Monthly Drop-In</div>
+          <div class="signup-name">Open Studio Session</div>
+          <div class="signup-desc">No prep, no pressure. Bring whatever you're working on and get a few quick ears on it. Every second Monday, 7:15 to 7:45pm Pacific, through 2026. Ages 18+.</div>
+          <form class="signup-form" action="https://app.kit.com/forms/9795184/subscriptions" method="post">
+            <input type="email" name="email_address" class="signup-input" placeholder="you@email.com" required>
+            <button type="submit" class="signup-btn">Reserve my spot</button>
+          </form>
+        </div>
+
+        <div class="signup-success">
+          <div class="signup-tag">You're in</div>
+          <div class="signup-name">See you at Open Studio Session</div>
+          <div class="signup-desc">Check your inbox confirm your spot and grab the recurring Meet link.</div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Work with me -->
@@ -866,7 +922,7 @@
         <div class="work-body">
           <div class="work-main">
             <div class="work-tag">Bookings</div>
-            <div class="work-name">Hire me to play</div>
+            <div class="work-name">Drums, Keys & Compositions</div>
             <div class="work-desc">Drums, solo performances, recording sessions, and events. Tell me the date and the place, and I will send you a quote.</div>
             <a class="work-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeOxvDJi858ZM-1auaN66w2_c7AyyMftSQiDhVjolJoNXX_Gg/viewform" target="_blank" rel="noopener" data-open-modal="hire-dialog" aria-haspopup="dialog">Get in touch</a>
           </div>
@@ -918,35 +974,6 @@
 
     </div>
 
-    <!-- Open Studio Session — free monthly drop-in signup -->
-    <div class="section-divider signup-divider">
-      <span class="section-divider-label">Free Monthly Drop-In</span>
-      <div class="section-divider-line"></div>
-    </div>
-
-    <div class="signup-card">
-      <div class="signup-accent"></div>
-      <div class="signup-body">
-
-        <div class="signup-form-wrap">
-          <div class="signup-tag">Monthly Drop-In</div>
-          <div class="signup-name">Open Studio Session</div>
-          <div class="signup-desc">No prep, no pressure. Bring whatever you're working on and get a few quick ears on it. Every second Monday, 7:15 to 7:45pm Pacific, through 2026. Ages 18+.</div>
-          <form class="signup-form" action="https://app.kit.com/forms/9795184/subscriptions" method="post">
-            <input type="email" name="email_address" class="signup-input" placeholder="you@email.com" required>
-            <button type="submit" class="signup-btn">Reserve my spot</button>
-          </form>
-        </div>
-
-        <div class="signup-success">
-          <div class="signup-tag">You're in</div>
-          <div class="signup-name">See you at Open Studio Session</div>
-          <div class="signup-desc">Check your inbox confirm your spot and grab the recurring Meet link.</div>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 
 </main>
@@ -955,6 +982,33 @@
   <span>&copy; Dr. Timothy Van Cleave &nbsp;·&nbsp; Portland, OR</span>
   <span>timothyvancleave.com</span>
 </footer>
+
+  <script>
+    // Hamburger menu: tap to open or close the nav links on phones.
+    (function () {
+      var nav = document.querySelector('nav');
+      var btn = document.getElementById('nav-toggle');
+      if (!nav || !btn) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('nav-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      btn.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('nav-open'));
+      });
+
+      // Tap anywhere outside the nav, or press Escape, to close it.
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+    })();
+  </script>
 
   <script>
     // If Kit just redirected back here after a signup, show the on-brand
